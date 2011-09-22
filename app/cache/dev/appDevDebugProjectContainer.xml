@@ -25,7 +25,7 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
-    <parameter key="database_driver">pdo_mysql</parameter>
+    <parameter key="database_driver">pdo_sqlite</parameter>
     <parameter key="database_host">localhost</parameter>
     <parameter key="database_port"></parameter>
     <parameter key="database_name">symfony</parameter>
@@ -36,7 +36,7 @@
     <parameter key="mailer_user"></parameter>
     <parameter key="mailer_password"></parameter>
     <parameter key="locale">en</parameter>
-    <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
+    <parameter key="secret">lkjsdlkfoiue234234sdkjhkl234</parameter>
     <parameter key="router_listener.class">Symfony\Bundle\FrameworkBundle\EventListener\RouterListener</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
@@ -54,7 +54,7 @@
     <parameter key="translation.loader.xliff.class">Symfony\Component\Translation\Loader\XliffFileLoader</parameter>
     <parameter key="debug.event_dispatcher.class">Symfony\Bundle\FrameworkBundle\Debug\TraceableEventDispatcher</parameter>
     <parameter key="debug.container.dump">D:\workspace\MMchat\app/cache/dev/appDevDebugProjectContainer.xml</parameter>
-    <parameter key="kernel.secret">ThisTokenIsNotSoSecretChangeIt</parameter>
+    <parameter key="kernel.secret">lkjsdlkfoiue234234sdkjhkl234</parameter>
     <parameter key="kernel.trust_proxy_headers">false</parameter>
     <parameter key="session.class">Symfony\Component\HttpFoundation\Session</parameter>
     <parameter key="session.storage.native.class">Symfony\Component\HttpFoundation\SessionStorage\NativeSessionStorage</parameter>
@@ -843,7 +843,7 @@
     </service>
     <service id="form.csrf_provider" class="Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider">
       <argument type="service" id="session"/>
-      <argument>ThisTokenIsNotSoSecretChangeIt</argument>
+      <argument>lkjsdlkfoiue234234sdkjhkl234</argument>
     </service>
     <service id="form.type.csrf" class="Symfony\Component\Form\Extension\Csrf\Type\CsrfType">
       <tag name="form.type" alias="csrf"/>
@@ -1542,7 +1542,9 @@
         <argument key="port"></argument>
         <argument key="user">root</argument>
         <argument key="password"></argument>
-        <argument key="driver">pdo_mysql</argument>
+        <argument key="driver">pdo_sqlite</argument>
+        <argument key="path">D:\workspace\MMchat\app/database.db</argument>
+        <argument key="charset">UTF8</argument>
         <argument key="driverOptions" type="collection"/>
       </argument>
       <argument type="service">
@@ -1553,16 +1555,7 @@
         </service>
       </argument>
       <argument type="service">
-        <service class="Doctrine\Common\EventManager" public="false">
-          <call method="addEventSubscriber">
-            <argument type="service">
-              <service class="Doctrine\DBAL\Event\Listeners\MysqlSessionInit" public="false">
-                <tag name="doctrine.event_subscriber" connection="default"/>
-                <argument>UTF8</argument>
-              </service>
-            </argument>
-          </call>
-        </service>
+        <service class="Doctrine\Common\EventManager" public="false"/>
       </argument>
       <argument type="collection"/>
     </service>
@@ -1587,7 +1580,9 @@
       <argument type="service">
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
-            <argument type="collection"/>
+            <argument type="collection">
+              <argument key="MMchatBundle">MMchat\MMchatBundle\Entity</argument>
+            </argument>
           </call>
           <call method="setMetadataCacheImpl">
             <argument type="service">
@@ -1618,7 +1613,23 @@
           </call>
           <call method="setMetadataDriverImpl">
             <argument type="service">
-              <service class="Doctrine\ORM\Mapping\Driver\DriverChain" public="false"/>
+              <service class="Doctrine\ORM\Mapping\Driver\DriverChain" public="false">
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service">
+                        <service class="Symfony\Bridge\Doctrine\Annotations\IndexedReader" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                        </service>
+                      </argument>
+                      <argument type="collection">
+                        <argument>D:\workspace\MMchat\src\MMchat\MMchatBundle\Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>MMchat\MMchatBundle\Entity</argument>
+                </call>
+              </service>
             </argument>
           </call>
           <call method="setProxyDir">

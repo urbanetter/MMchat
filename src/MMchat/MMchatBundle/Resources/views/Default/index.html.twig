@@ -1,1 +1,54 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<div id="inne">
+    <div class="grid_3 user">
+        Name: <input type="text" name="name" autofocus><br>
+        <button>Das sag ich!</button>
+    </div>
+    
+    <div class="grid_9 input">
+        <textarea class="grid_9"></textarea>
+    </div>
+    
+    <div class="clear"></div>
+</div>
+
+<div id="usse">
+    <hr>
+    <div class="grid_3 user">
+        <strong>Fritz</strong>
+    </div>
+    
+    <div class="grid_9 message">
+        Sali sali, d Sunne schint f&uuml;r alli.
+    </div>
+    
+    <div class="clear"></div>
+
+    <div class="grid_3 user">
+        <strong>Hansueli</strong>
+    </div>
+    
+    <div class="grid_9 message">
+        Da isch guet: <a href="http://www.google.ch">http://www.google.ch</a><br>
+        Und namal e Zilete.
+    </div>
+    
+    <div class="clear"></div>
+
+    <div class="grid_3 user">
+        <strong>Fritz</strong>
+    </div>
+    
+    <div class="grid_9 message">
+        Sali sali, d Sunne schint f&uuml;r alli.
+    </div>
+    
+    <div class="clear"></div>
+
+</div>
+
+
+{% endblock %}
