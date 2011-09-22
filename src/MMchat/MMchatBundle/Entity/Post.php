@@ -36,12 +36,11 @@ class Post
     private $created_at;
 
     /**
-     * @var User $user
+     * @var text $author
      * 
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\Column(name="author", type="text")
      */
-    protected $user;
+    protected $author;
 
     /**
      * Get id
@@ -94,22 +93,22 @@ class Post
     }
 
     /**
-     * Set user
+     * Set author
      *
-     * @param User $user
+     * @param string $author
      */
-    public function setUser($user)
+    public function setAuthor($author)
     {
-        $this->user = $user;
+        $this->author = $author;
     }
 
     /**
-     * Get user
+     * Get author
      *
-     * @return User 
+     * @return text 
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 }
