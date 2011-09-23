@@ -22,10 +22,9 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
   <!-- CSS: implied media=all -->
-  <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="bundles/mmchat/css/style.css">
-  <link rel="stylesheet" href="bundles/mmchat/css/text.css">
-  <link rel="stylesheet" href="bundles/mmchat/css/960_12_col.css">
+  {% stylesheets '@MMchatBundle/Resources/public/css/*' %}
+  <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+  {% endstylesheets %}
   
   {% block stylesheets %}{% endblock %}
   
@@ -61,8 +60,9 @@
 
   <!-- scripts concatenated and minified via ant build script-->
   {% block javascripts %}{% endblock %}
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
+  {% javascripts '@MMchatBundle/Resources/public/js/*' %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
   <!-- end scripts-->
 
 

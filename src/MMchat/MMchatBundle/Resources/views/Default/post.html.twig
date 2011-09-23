@@ -1,0 +1,13 @@
+    <hr>
+    
+    {% for post in posts %}
+    <div class="grid_3 user">
+        <strong>{{ post.author }}</strong>
+    </div>
+    
+    <div class="grid_9 message">
+        {{ post.post }}
+    </div>
+    
+    <div class="clear"></div>
+    {% endfor %}
