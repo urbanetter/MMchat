@@ -47,7 +47,7 @@ class DefaultController extends Controller
     private function getPosts()
     {
         $repository = $this->getDoctrine()->getRepository('MMchatBundle:Post');
-        $allPosts = $repository->findAll();
+        $allPosts = $repository->findBy(array(), array('created_at' => 'DESC'));
         return array("posts" => $allPosts);	
     }
 }
