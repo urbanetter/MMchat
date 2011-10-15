@@ -9,4 +9,10 @@ $(document).ready(function(){
 			$('textarea').val('').focus();
 		});
 	});
+	var aktualisiere = function() {
+		$.get('/post', function(data){
+			$('#usse').html(data);
+		});
+	}
+	window.setInterval("aktualisiere()", 3000);
 });

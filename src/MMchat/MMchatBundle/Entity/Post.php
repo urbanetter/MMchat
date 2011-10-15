@@ -3,6 +3,7 @@
 namespace MMchat\MMchatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MMchat\MMchatBundle\Entity\Post
@@ -25,6 +26,7 @@ class Post
 	 * @var text $post
 	 *
 	 * @ORM\Column(name="post", type="text")
+	 * @Assert\NotBlank()
 	 */
 	private $post;
 
@@ -39,6 +41,7 @@ class Post
 	 * @var text $author
 	 *
 	 * @ORM\Column(name="author", type="text")
+	 * @Assert\NotBlank()
 	 */
 	protected $author;
 
