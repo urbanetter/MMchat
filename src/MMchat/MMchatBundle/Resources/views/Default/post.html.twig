@@ -1,12 +1,17 @@
-    <hr>
-    
+    {% set day = "" %}
     {% for post in posts %}
+    {% if post.createdAt|date("d.m.Y") != day %}
+        {% set day = post.createdAt|date("d.m.Y") %}
+        <div class="grid_12 date"><strong>{{ day }}</strong></div>
+	    <div class="clear"></div>
+    {% endif %}
+     
     <div class="grid_3 user">
         <strong>{{ post.author }}</strong>
     </div>
     
     <div class="grid_9 message">
-        {{ post.post | raw }}
+        {{ post.post|raw }}
     </div>
     
     <div class="clear"></div>

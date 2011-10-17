@@ -25,7 +25,7 @@ class DefaultController extends Controller
      */
     public function postAction()
     {
-    	if ($this->getRequest()->getMethod() == 'post') {
+    	if ($this->getRequest()->getMethod() == 'POST') {
 			$post = new Post();
 
 	    	$post->setAuthor($this->getRequest()->request->get('author'));
@@ -40,6 +40,8 @@ class DefaultController extends Controller
 			    $em = $this->getDoctrine()->getEntityManager();
 			    $em->persist($post);
 			    $em->flush();
+	       	} else {
+	       		var_dump($errors);
 	       	}
 		}
 
